@@ -3,7 +3,7 @@
 ## Firefix Installer
 ### Direct Install
 ```sh
-curl -sSL https://raw.githubusercontent.com/kevinroghero3/unofficial_installer/refs/heads/main/install_firefox.sh | bash
+curl -sSL https://raw.githubusercontent.com/kevinroghero3/unofficial_tools/refs/heads/main/install_firefox.sh | bash
 ```
 ### Download and install
 ```sh
@@ -19,5 +19,5 @@ bash install_firefox.sh
 ## Remover
 ### Direct Install
 ```sh
-curl -sSL https://raw.githubusercontent.com/kevinroghero3/unofficial_installer/refs/heads/main/remover.sh | bash
+curl -sSL https://raw.githubusercontent.com/kevinroghero3/unofficial_tools/refs/heads/main/remover.sh | bash
 ```
