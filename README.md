@@ -1,9 +1,14 @@
 # unofficial_installer
 
-`chmod +x install_firefox.sh`
+## Firefix Installer
 
-`sudo ./install_firefox.sh`
-
+```sh
+chmod +x install_firefox.sh
+```
+```sh
+sudo ./install_firefox.sh
+```
 or
-
-`bash install_firefox.sh`
+```sh
+bash install_firefox.sh
+```
