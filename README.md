@@ -1,4 +1,4 @@
-# unofficial_installer
+# unofficial_tools
 
 ## Firefix Installer
 ### Direct Install
@@ -15,4 +15,9 @@ sudo ./install_firefox.sh
 or
 ```sh
 bash install_firefox.sh
+```
+## Remover
+### Direct Install
+```sh
+curl -sSL https://raw.githubusercontent.com/kevinroghero3/unofficial_installer/refs/heads/main/remover.sh | bash
 ```
