@@ -41,7 +41,12 @@ else
 fi
 
 # Aggiunge il repository di Mozilla alla lista delle sorgenti
-echo "deb [signed-by=/etc/apt/keyrings/packages.mozilla.org.asc] https://packages.mozilla.org/apt mozilla main" | sudo tee -a /etc/apt/sources.list.d/mozilla.list > /dev/null
+mozilla_repo_line="deb [signed-by=/etc/apt/keyrings/packages.mozilla.org.asc] https://packages.mozilla.org/apt mozilla main"
+if ! grep -qF "$mozilla_repo_line" /etc/apt/sources.list.d/mozilla.list; then
+  echo "$mozilla_repo_line" | sudo tee -a /etc/apt/sources.list.d/mozilla.list > /dev/null
+else
+  echo "Il repository di Mozilla è già presente in /etc/apt/sources.list.d/mozilla.list"
+fi
 
 # Imposta la preferenza per il repository di Mozilla
 echo '
