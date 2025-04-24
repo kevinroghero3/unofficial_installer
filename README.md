@@ -21,3 +21,8 @@ bash install_firefox.sh
 ```sh
 curl -sSL https://raw.githubusercontent.com/kevinroghero3/unofficial_tools/refs/heads/main/remover.sh | bash
 ```
+## AutoBackup
+### Direct Install
+```sh
+curl -sSL https://raw.githubusercontent.com/kevinroghero3/unofficial_tools/refs/heads/main/backup_setup.sh | bash
+```
