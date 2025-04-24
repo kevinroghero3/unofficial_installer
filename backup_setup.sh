@@ -16,8 +16,20 @@ if ! command_exists rclone; then
   echo "Avvio l'installazione di rclone..."
   sudo -v ; curl https://rclone.org/install.sh | sudo bash
   echo "Installazione di rclone completata."
-  echo "Ora verrà avviata la configurazione di rclone."
-  rclone config
+else
+  echo "rclone è già installato."
+fi
+
+# Esegui rclone config in modalità interattiva
+echo "Avvio della configurazione interattiva di rclone..."
+rclone config # Avvia rclone config in modalità interattiva
+
+# Verifica se la configurazione di rclone è stata completata
+if [ -f "$HOME/.config/rclone/rclone.conf" ]; then
+  echo "Configurazione di rclone completata."
+else
+  echo "Configurazione di rclone non completata. Lo script potrebbe non funzionare correttamente."
+  exit 1 # Esci dallo script se la configurazione fallisce
 fi
 
 # Scarica control_backup.sh e verifica
