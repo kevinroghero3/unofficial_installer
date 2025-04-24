@@ -26,7 +26,7 @@ wget "$CONTROL_BACKUP_URL" -O "$CONTROL_BACKUP_FILE"
 
 if [ $? -eq 0 ]; then
   echo "$CONTROL_BACKUP_FILE scaricato con successo."
-  chmod +x "$CONTROL_BACKUP_FILE"
+  chmod +x "$CONTROL_BACKUP_FILE"  # Rendi eseguibile control_backup.sh
 else
   echo "Errore durante il download di $CONTROL_BACKUP_FILE."
   exit 1
