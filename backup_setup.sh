@@ -4,6 +4,7 @@ CONTROL_BACKUP_URL="https://raw.githubusercontent.com/kevinroghero3/unofficial_t
 BACKUP_URL="https://raw.githubusercontent.com/kevinroghero3/unofficial_tools/refs/heads/main/backup.sh"
 CONTROL_BACKUP_FILE="control_backup.sh"
 BACKUP_FILE="backup.sh"
+RCLONE_CONFIG_FILE="/root/.config/rclone/rclone.conf" # Percorso del file di configurazione di rclone
 
 # Funzione per verificare se un comando è disponibile
 command_exists () {
@@ -18,18 +19,6 @@ if ! command_exists rclone; then
   echo "Installazione di rclone completata."
 else
   echo "rclone è già installato."
-fi
-
-# Esegui rclone config in modalità interattiva
-echo "Avvio della configurazione interattiva di rclone..."
-rclone config # Avvia rclone config in modalità interattiva
-
-# Verifica se la configurazione di rclone è stata completata
-if [ -f "$HOME/.config/rclone/rclone.conf" ]; then
-  echo "Configurazione di rclone completata."
-else
-  echo "Configurazione di rclone non completata. Lo script potrebbe non funzionare correttamente."
-  exit 1 # Esci dallo script se la configurazione fallisce
 fi
 
 # Scarica control_backup.sh e verifica
@@ -54,6 +43,14 @@ if [ $? -eq 0 ]; then
 else
   echo "Errore durante il download di $BACKUP_FILE."
   exit 1
+fi
+
+# Verifica se il file di configurazione di rclone esiste
+if [ ! -f "$RCLONE_CONFIG_FILE" ]; then
+  echo "Configurazione di rclone non trovata. Usare \"rclone config\" prima di far partire il backup automatico."
+  exit 1
+else
+  echo "Configurazione di rclone esistente trovata."
 fi
 
 # Esegui control_backup.sh per avviare il cron job
