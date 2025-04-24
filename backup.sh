@@ -1,13 +1,14 @@
 #!/bin/bash
 
 # Configurazione
-SOURCE_DIR="/var/lib/pufferpanel/servers/42cfbc1d"  # Sostituisci con il percorso della cartella da ব্যাকআপ
-DEST_MEGA="mega:Sync" # Sostituisci con il percorso della cartella di ব্যাকআপ su Mega
+DIR_NAME="9cc2d9c6"
+SOURCE_DIR="/var/lib/pufferpanel/servers"               # Cartella da backuppare
+DEST_MEGA="mega:Sync"                                   # Destinazione su Mega
 MAX_BACKUPS=3
 BACKUP_PREFIX="backup_"
 TIMESTAMP=$(date +%Y-%m-%d_%H-%M)
 BACKUP_FILE="$BACKUP_PREFIX$TIMESTAMP.tar.gz"
-LOG_FILE="/var/log/backup_mega.log" # Facoltativo: file di log
+LOG_FILE="/var/log/backup_mega.log"                       # File di log (opzionale)
 
 # Funzione per scrivere nel log
 log() {
@@ -21,7 +22,8 @@ echo "==========================================================================
 
 # Crea un archivio compresso della cartella sorgente
 log "Creazione archivio di backup: $BACKUP_FILE"
-tar -czf "$BACKUP_FILE" "$SOURCE_DIR"
+# Modifica: aggiunta l'opzione -C per cambiare la directory prima di archiviare
+tar -czf "$BACKUP_FILE" -C "$SOURCE_DIR" "$DIR_NAME"
 
 if [ $? -ne 0 ]; then
   log "Errore durante la creazione dell'archivio."
