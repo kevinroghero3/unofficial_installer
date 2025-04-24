@@ -1,20 +1,23 @@
 #!/bin/bash
 
 # Configurazione
-SOURCE_DIR="/path/to/your/source/folder"  # Sostituisci con il percorso della cartella da ব্যাকআপ
-DEST_MEGA="mega:/path/to/your/mega/backup/folder" # Sostituisci con il percorso della cartella di ব্যাকআপ su Mega
+SOURCE_DIR="/var/lib/pufferpanel/servers/42cfbc1d"  # Sostituisci con il percorso della cartella da ব্যাকআপ
+DEST_MEGA="mega:Sync" # Sostituisci con il percorso della cartella di ব্যাকআপ su Mega
 MAX_BACKUPS=3
 BACKUP_PREFIX="backup_"
-TIMESTAMP=$(date +%Y%m%d_%H%M)
+TIMESTAMP=$(date +%Y-%m-%d_%H-%M)
 BACKUP_FILE="$BACKUP_PREFIX$TIMESTAMP.tar.gz"
 LOG_FILE="/var/log/backup_mega.log" # Facoltativo: file di log
 
 # Funzione per scrivere nel log
 log() {
   local MESSAGE="$1"
-  echo "$(date +%Y-%m-%d %H:%M:%S) - $MESSAGE" >> "$LOG_FILE"
-  echo "$(date +%Y-%m-%d %H:%M:%S) - $MESSAGE" # Mostra anche a schermo
+  local TIMESTAMP=$(date +%Y-%m-%d_%H:%M:%S)
+  echo "$TIMESTAMP - \"$MESSAGE\"" >> "$LOG_FILE"
+  echo "$TIMESTAMP - \"$MESSAGE\"" # Mostra anche a schermo
 }
+
+echo "==========================================================================================================="
 
 # Crea un archivio compresso della cartella sorgente
 log "Creazione archivio di backup: $BACKUP_FILE"
@@ -35,7 +38,7 @@ if [ "$backup_count" -ge "$MAX_BACKUPS" ]; then
   oldest_backup=$(rclone ls "$DEST_MEGA" | grep "$BACKUP_PREFIX" | sort | head -n 1 | awk '{print $2}')
   if [ -n "$oldest_backup" ]; then
     log "Eliminazione del backup più vecchio: $oldest_backup"
-    rclone delete "$DEST_MEGA/$oldest_backup"
+    rclone delete "$DEST_MEGA/$oldest_backup" --mega-hard-delete
     if [ $? -ne 0 ]; then
       log "Errore durante l'eliminazione del backup più vecchio."
     fi
