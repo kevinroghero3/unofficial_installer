@@ -1,7 +1,7 @@
 #!/bin/bash
 
 SCRIPT_PATH="/home/user/backup.sh"
-CRONTAB_LINE="*/10 * * * * $SCRIPT_PATH"
+CRONTAB_LINE="*/15 * * * * $SCRIPT_PATH"
 
 # Funzione per verificare se la riga è presente nel crontab
 is_cron_active() {
@@ -12,9 +12,9 @@ is_cron_active() {
 start_cron() {
   if ! is_cron_active; then
     (crontab -l ; echo "$CRONTAB_LINE") | crontab -
-    echo "Cron job per il backup (ogni 10 minuti) è stato avviato."
+    echo "Cron job per il backup (ogni 15 minuti) è stato avviato."
   else
-    echo "Cron job per il backup (ogni 10 minuti) è già attivo."
+    echo "Cron job per il backup (ogni 15 minuti) è già attivo."
   fi
 }
 
@@ -22,9 +22,9 @@ start_cron() {
 stop_cron() {
   if is_cron_active; then
     crontab -l | grep -v -Fx "$CRONTAB_LINE" | crontab -
-    echo "Cron job per il backup (ogni 10 minuti) è stato fermato."
+    echo "Cron job per il backup (ogni 15 minuti) è stato fermato."
   else
-    echo "Cron job per il backup (ogni 10 minuti) non è attivo."
+    echo "Cron job per il backup (ogni 15 minuti) non è attivo."
   fi
 }
 
